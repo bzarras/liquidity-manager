@@ -21,7 +21,7 @@ class Order(Base):
     amount_usd: Mapped[int]
     order_type: Mapped[OrderType] = mapped_column(Enum(OrderType, native_enum=False))
     order_status: Mapped[OrderStatus] = mapped_column(
-        Enum(OrderStatus, native_enum=False), default=OrderStatus.PENDING
+        Enum(OrderStatus, native_enum=False), default=OrderStatus.OPEN
     )
     created_at: Mapped[datetime.datetime] = mapped_column(
         TIMESTAMP(timezone=True), insert_default=_utc_now
