@@ -72,9 +72,17 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 ## Notes
-- Wish I didn't pull in the entire heroUI
-- Could run with docker compose, but might be too much work
-- Need to mention environment requirements for FE and BE and how to install stuff
-- unit tests?
-- Talk about database file
-- Docker compose?
+
+I've checked the SQLite database file (liquidity_manager.db) into the repo,
+which I normally wouldn't do, but this will save you the headache of running
+migrations on a fresh database. It will also allow you to see some existing data
+in the app.
+
+I tried to create a simpler startup script with `docker compose`, but was seeing
+crazy build times when running Next.js in docker, so I decided to stick with the
+more manual flow above.
+
+I pulled in a library called HeroUI to help build the frontend. I pulled in the
+entire library just to be able to move fast for the sake of this assigment,
+but in a production setting I would only pull in the specific components that
+are being used, to avoid package bloat.
