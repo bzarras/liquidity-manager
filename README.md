@@ -22,7 +22,7 @@ The following sections assume you are running these commands from within the `li
 
 This project was built and managed with `uv`. If you don't already have uv installed,
 please install it with the following command, or read about alternative installation
-methods in [their docs](https://docs.astral.sh/uv/getting-started/installation/).
+methods in [the uv docs](https://docs.astral.sh/uv/getting-started/installation/).
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -42,7 +42,7 @@ uv sync
 
 ### Frontend
 
-First, make sure you have install Node.js 22. This is the LTS version, and if you're
+First, make sure you have Node.js 22. This is the LTS version, and if you're
 using nvm you can run:
 
 ```bash
