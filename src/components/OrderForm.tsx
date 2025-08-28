@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardBody, CardHeader, Button, Input, Select, SelectItem } from '@heroui/react';
+import { Card, CardBody, CardHeader, Button, Input, Select, SelectItem, addToast } from '@heroui/react';
 import { apiClient } from '@/lib/api';
 
 const MATURITIES = [
@@ -37,18 +37,7 @@ export default function OrderForm({ onOrderSubmitted }: OrderFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!maturity || !amount || !orderType) {
-      alert('Please fill in all fields');
-      return;
-    }
-
     const numericAmount = parseInt(amount);
-    if (isNaN(numericAmount) || numericAmount <= 0) {
-      alert('Please enter a valid amount');
-      return;
-    }
-
     setIsSubmitting(true);
     
     try {
@@ -65,9 +54,18 @@ export default function OrderForm({ onOrderSubmitted }: OrderFormProps) {
       
       // Notify parent component
       onOrderSubmitted?.();
+      
+      // Show success toast
+      addToast({
+        title: "Order placed successfully!",
+        color: "success"
+      });
     } catch (error) {
       console.error('Error submitting order:', error);
-      alert('Error submitting order. Please try again.');
+      addToast({
+        title: "Error placing order. Please try again.",
+        color: "danger"
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -83,8 +81,11 @@ export default function OrderForm({ onOrderSubmitted }: OrderFormProps) {
           <Select
             label="Treasury Maturity"
             placeholder="Select maturity"
-            value={maturity}
-            onChange={(e) => setMaturity(e.target.value)}
+            selectedKeys={maturity ? [maturity] : []}
+            onSelectionChange={(keys) => {
+              const selectedKey = Array.from(keys)[0] as string;
+              setMaturity(selectedKey || '');
+            }}
             isRequired
           >
             {MATURITIES.map((mat) => (
@@ -97,8 +98,11 @@ export default function OrderForm({ onOrderSubmitted }: OrderFormProps) {
           <Select
             label="Order Type"
             placeholder="Select order type"
-            value={orderType}
-            onChange={(e) => setOrderType(e.target.value)}
+            selectedKeys={orderType ? [orderType] : []}
+            onSelectionChange={(keys) => {
+              const selectedKey = Array.from(keys)[0] as string;
+              setOrderType(selectedKey || '');
+            }}
             isRequired
           >
             {ORDER_TYPES.map((type) => (
@@ -119,7 +123,7 @@ export default function OrderForm({ onOrderSubmitted }: OrderFormProps) {
                 <span className="text-default-400 text-small">$</span>
               </div>
             }
-            min="0"
+            min="1"
             step="1"
             isRequired
           />
