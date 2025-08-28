@@ -1,0 +1,19 @@
+[project]
+name = "liquidity-manager"
+version = "0.1.0"
+description = "liquidity manager demo app"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiosqlite>=0.21.0",
+    "alembic>=1.16.5",
+    "fastapi[standard]>=0.116.1",
+    "httpx>=0.28.1",
+    "sqlalchemy[asyncio]>=2.0.43",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1",
+    "ruff>=0.12.10",
+]
