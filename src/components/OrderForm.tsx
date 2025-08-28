@@ -20,10 +20,7 @@ const MATURITIES = [
   '30 YEAR',
 ];
 
-const ORDER_TYPES = [
-  { key: 'BUY', label: 'BUY' },
-  { key: 'SELL', label: 'SELL' }
-];
+const ORDER_TYPES = ['BUY', 'SELL'];
 
 interface OrderFormProps {
   onOrderSubmitted?: () => void;
@@ -105,9 +102,9 @@ export default function OrderForm({ onOrderSubmitted }: OrderFormProps) {
             }}
             isRequired
           >
-            {ORDER_TYPES.map((type) => (
-              <SelectItem key={type.key}>
-                {type.label}
+            {ORDER_TYPES.map((ot) => (
+              <SelectItem key={ot}>
+                {ot}
               </SelectItem>
             ))}
           </Select>
