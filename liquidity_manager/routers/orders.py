@@ -10,10 +10,16 @@ router = APIRouter(tags=["Orders"])
 
 
 @router.get("/")
-async def get_orders(session: AsyncSession = Depends(get_async_session)) -> Orders:
-    stmt = select(tables.Order).order_by(desc(tables.Order.created_at))
+async def get_orders(
+    limit: int = 10, session: AsyncSession = Depends(get_async_session)
+) -> Orders:
+    stmt = (
+        select(tables.Order)
+        .order_by(desc(tables.Order.created_at))
+        .limit(limit if limit > 0 else None)
+    )
     result = await session.scalars(stmt)
-    orders = [Order.model_validate(o) for o in result]
+    orders = [Order.model_validate(r) for r in result]
     return Orders(orders=orders, count=len(orders))
 
 

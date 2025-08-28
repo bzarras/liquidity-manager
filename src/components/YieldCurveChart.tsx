@@ -79,16 +79,20 @@ export default function YieldCurveChart() {
         </h3>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={yieldData}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#6b7280" />
             <XAxis 
               dataKey="maturity" 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#ffffff' }}
+              axisLine={{ stroke: '#ffffff' }}
+              tickLine={{ stroke: '#ffffff' }}
             />
             <YAxis 
-              tick={{ fontSize: 12 }}
-              label={{ value: 'Yield (%)', angle: -90, position: 'insideLeft' }}
+              tick={{ fontSize: 12, fill: '#ffffff' }}
+              label={{ value: 'Yield (%)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#ffffff' } }}
               domain={['dataMin - 0.1', 'dataMax + 0.1']}
               tickFormatter={(value) => value.toFixed(2)}
+              axisLine={{ stroke: '#ffffff' }}
+              tickLine={{ stroke: '#ffffff' }}
             />
             <Tooltip 
               formatter={(value: number) => [`${value}%`, 'Yield']}
