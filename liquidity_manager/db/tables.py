@@ -26,4 +26,6 @@ class Order(Base):
     created_at: Mapped[datetime.datetime] = mapped_column(
         TIMESTAMP(timezone=True), insert_default=_utc_now
     )
-    deleted_at: Mapped[datetime.datetime] = mapped_column(TIMESTAMP(timezone=True))
+    deleted_at: Mapped[datetime.datetime | None] = mapped_column(
+        TIMESTAMP(timezone=True)
+    )

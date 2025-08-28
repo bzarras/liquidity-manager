@@ -30,7 +30,7 @@ def upgrade() -> None:
         sa.Column("order_type", sa.String(), nullable=False),
         sa.Column("order_status", sa.String(), nullable=False),
         sa.Column("created_at", sa.TIMESTAMP(timezone=True), nullable=False),
-        sa.Column("deleted_at", sa.TIMESTAMP(timezone=True), nullable=False),
+        sa.Column("deleted_at", sa.TIMESTAMP(timezone=True), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
     # ### end Alembic commands ###
